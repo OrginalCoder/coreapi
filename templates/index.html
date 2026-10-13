@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CoreAPI — Bepul AI Savol-Javob API Platformasi{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <div class="badge-pill light-pill">
+        <span class="badge-dot-cobalt"></span>
+        <span>Bepul AI API</span>
+        <span class="badge-divider"></span>
+        <span class="badge-sub">Ochiq Integratsiya</span>
+      </div>
+
+      <h1 class="hero-title">
+        Bepul AI API — <br>
+        <span class="gradient-brand-text">loyihangiz uchun</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Oddiy HTTP so‘rovi orqali sun’iy intellekt imkoniyatlarini loyihangizga integratsiya qiling.
+        Savol yuboring va JSON formatida javob oling.
+      </p>
+
+      <div class="hero-actions">
+        <a href="{% url 'docs' %}" class="btn btn-outline-light">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>API hujjatlari</span>
+        </a>
+        <a href="{% url 'docs' %}#playground" class="btn btn-brand-primary">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>Sinab ko‘rish</span>
+        </a>
+      </div>
+
+      <div class="hero-stats-light">
+        <div class="stat-item">
+          <div class="stat-icon-wrap icon-cobalt">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <div>
+            <span class="stat-value">Ochiq</span>
+            <span class="stat-label">Kalitsiz kirish</span>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-icon-wrap icon-indigo">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </div>
+          <div>
+            <span class="stat-value">JSON</span>
+            <span class="stat-label">Standart format</span>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-icon-wrap icon-emerald">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <div>
+            <span class="stat-value">REST API</span>
+            <span class="stat-label">POST /api/v1/chat/</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Preview Card (Stripe-Style Midnight Terminal on White Elevated Card) -->
+    <div class="hero-preview">
+      <div class="code-card-stripe">
+        <div class="code-card-header">
+          <div class="window-controls">
+            <span class="control-dot red"></span>
+            <span class="control-dot yellow"></span>
+            <span class="control-dot green"></span>
+          </div>
+          <div class="endpoint-pill-light">
+            <span class="method-tag method-post">POST</span>
+            <span class="endpoint-path">/api/v1/chat/</span>
+          </div>
+          <button type="button" class="btn-copy-code" data-target="hero-example-code" title="Nusxalash" aria-label="Kodni nusxalash">
+            <svg class="copy-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="copy-label">Nusxalash</span>
+          </button>
+        </div>
+
+        <div class="code-card-body">
+          <div class="code-section-label">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>So‘rov (Request JSON):</span>
+          </div>
+          <pre class="code-block-terminal"><code class="language-json">{
+  <span class="json-key">"question"</span>: <span class="json-string">"Python nima?"</span>
+}</code></pre>
+
+          <div class="code-divider">
+            <span class="divider-text">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Namuna javob (Example Response):</span>
+            </span>
+          </div>
+
+          <pre class="code-block-terminal response-preview" id="hero-example-code"><code class="language-json">{
+  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
+  <span class="json-key">"answer"</span>: <span class="json-string">"Python — umumiy maqsadli, o‘qilishi oson dasturlash tili."</span>
+}</code></pre>
+          <div class="preview-disclaimer">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>Bu yerda ko‘rsatilgan javob namunadir. Jonli AI natijasini Playground sahifasida oling.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="section features-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag-light">Imkoniyatlar</span>
+      <h2 class="section-title">Nega aynan CoreAPI?</h2>
+      <p class="section-subtitle">
+        Ortiqcha murakkabliklarsiz, dasturchiga kerakli bo‘lgan eng asosiy qulayliklar.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card-white">
+        <div class="feature-icon-gem icon-cobalt">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </div>
+        <h3 class="feature-title">Oddiy HTTP integratsiya</h3>
+        <p class="feature-desc">
+          Istalgan til yoki kutubxona (Python, JS, Go, cURL) orqali bitta POST so‘rovi bilan ulaning.
+        </p>
+      </div>
+
+      <div class="feature-card-white">
+        <div class="feature-icon-gem icon-indigo">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+        </div>
+        <h3 class="feature-title">Standart JSON formati</h3>
+        <p class="feature-desc">
+          So‘rovlar ham, javoblar ham oldindan ma’lum va barqaror JSON strukturasida uzatiladi.
+        </p>
+      </div>
+
+      <div class="feature-card-white">
+        <div class="feature-icon-gem icon-emerald">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <h3 class="feature-title">Ro‘yxatdan o‘tish shart emas</h3>
+        <p class="feature-desc">
+          API kalitlarini generatsiya qilish yoki hisob yaratish talab etilmaydi — darhol ishga tushiring.
+        </p>
+      </div>
+
+      <div class="feature-card-white">
+        <div class="feature-icon-gem icon-violet">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </div>
+        <h3 class="feature-title">Interaktiv API Playground</h3>
+        <p class="feature-desc">
+          Hujjatlar sahifasida jonli savol yuborib, AI javobi va kechikish vaqtini bevosita ko‘ring.
+        </p>
+      </div>
+
+      <div class="feature-card-white">
+        <div class="feature-icon-gem icon-blue">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+        <h3 class="feature-title">To‘liq dasturchi hujjatlari</h3>
+        <p class="feature-desc">
+          Python, JavaScript va cURL uchun tayyor kod namunalari va avtomatik OpenAPI spetsifikatsiyasi.
+        </p>
+      </div>
+
+      <div class="feature-card-white">
+        <div class="feature-icon-gem icon-amber">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <h3 class="feature-title">Yengil va ko‘p qirrali</h3>
+        <p class="feature-desc">
+          Telegram botlar, shaxsiy veb-saytlar va avtomatlashtirish skriptlari uchun mukammal yechim.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Integration Steps Section -->
+<section class="section steps-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag-light">Jarayon</span>
+      <h2 class="section-title">Integratsiya bosqichlari</h2>
+      <p class="section-subtitle">
+        Loyiha bilan ishlashni boshlash uchun 4 ta oddiy qadam:
+      </p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card-white">
+        <div class="step-badge-cobalt">01</div>
+        <h3 class="step-title">Hujjatlarni oching</h3>
+        <p class="step-desc">
+          API endpointi, parametrlar va xatolik javoblari bilan tanishib chiqing.
+        </p>
+      </div>
+
+      <div class="step-card-white">
+        <div class="step-badge-cobalt">02</div>
+        <h3 class="step-title">JSON so‘rov tayyorlang</h3>
+        <p class="step-desc">
+          <code>{"question": "Savol"}</code> ko‘rinishida JSON obyekt yarating.
+        </p>
+      </div>
+
+      <div class="step-card-white">
+        <div class="step-badge-cobalt">03</div>
+        <h3 class="step-title">POST so‘rov yuboring</h3>
+        <p class="step-desc">
+          <code>/api/v1/chat/</code> manziliga dasturingizdan so‘rov jo‘nating.
+        </p>
+      </div>
+
+      <div class="step-card-white">
+        <div class="step-badge-cobalt">04</div>
+        <h3 class="step-title">Javobni qabul qiling</h3>
+        <p class="step-desc">
+          JSON javobidagi <code>answer</code> maydonidagi AI matnini o‘z ilovangizda foydalaning.
+        </p>
+      </div>
+    </div>
+
+    <div class="steps-cta">
+      <a href="{% url 'docs' %}#playground" class="btn btn-brand-primary btn-lg">
+        <span>Playground’da hoziroq sinab ko‘ring</span>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

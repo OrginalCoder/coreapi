@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}CoreAPI — Dasturchilar uchun Zamonaviy AI Savol-Javob API{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Dasturchilar uchun oson, tezkor va bepul AI savol-javob API platformasi. Oddiy HTTP so‘rovi bilan sun’iy intellekt javobini JSON formatida oling.{% endblock %}">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'></polygon><polyline points='2 17 12 22 22 17'></polyline><polyline points='2 12 12 17 22 12'></polyline></svg>">
+  
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="stripe-light-body">
+  <!-- Soft Ambient Background & Grid Canvas -->
+  <div class="light-ambient-mesh" aria-hidden="true">
+    <div class="ambient-glow glow-top"></div>
+    <div class="ambient-glow glow-accent"></div>
+  </div>
+  <div class="light-grid-pattern" aria-hidden="true"></div>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="{% url 'index' %}" class="brand-logo" aria-label="CoreAPI Bosh sahifa">
+        <span class="logo-icon-gem" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </span>
+        <span class="logo-text">Core<span class="logo-accent">API</span></span>
+        <span class="version-chip">v1.0</span>
+      </a>
+
+      <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menyuni ochish yoki yopish" aria-expanded="false" aria-controls="primary-nav-menu">
+        <svg class="icon-menu-open" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="icon-menu-close" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="nav-menu" id="primary-nav-menu" aria-label="Asosiy navigatsiya">
+        <a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <span>Bosh sahifa</span>
+        </a>
+        <a href="{% url 'docs' %}" class="nav-link {% if request.resolver_match.url_name == 'docs' %}active{% endif %}">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>API hujjatlari</span>
+        </a>
+        <a href="{% url 'swagger-ui' %}" class="nav-link nav-external" target="_blank" rel="noopener">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          <span>Swagger UI</span>
+        </a>
+        <a href="{% url 'docs' %}#playground" class="btn btn-sm btn-brand-primary nav-cta">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>API’ni sinab ko‘rish</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <div class="brand-logo footer-logo">
+          <span class="logo-icon-gem" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </span>
+          <span class="logo-text">Core<span class="logo-accent">API</span></span>
+        </div>
+        <p class="footer-desc">
+          Dasturchilar va muhandislar uchun yengil, chaqqon va qulay AI savol-javob API platformasi.
+        </p>
+        <div class="footer-notice-pill">
+          <svg class="notice-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span>Eslatma: CoreAPI dastlabki bosqichda bo‘lib, tajriba maqsadida taqdim etilmoqda.</span>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">Tezkor havolalar</h4>
+        <ul class="footer-links">
+          <li><a href="{% url 'index' %}">Bosh sahifa</a></li>
+          <li><a href="{% url 'docs' %}">API hujjatlari</a></li>
+          <li><a href="{% url 'docs' %}#playground">Interaktiv Playground</a></li>
+          <li><a href="{% url 'swagger-ui' %}" target="_blank" rel="noopener">Swagger spetsifikatsiyasi</a></li>
+          <li><a href="{% url 'schema' %}" target="_blank" rel="noopener">OpenAPI Schema (JSON)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">API Standarti</h4>
+        <ul class="footer-links">
+          <li><span class="footer-meta"><span class="meta-dot"></span> Format: JSON</span></li>
+          <li><span class="footer-meta"><span class="meta-dot"></span> Metod: POST</span></li>
+          <li><span class="footer-meta"><span class="meta-dot"></span> Endpoint: /api/v1/chat/</span></li>
+          <li><span class="footer-meta"><span class="meta-dot"></span> Autentifikatsiya: Kerak emas</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; {{ current_year|default:"2026" }} CoreAPI. Barcha huquqlar himoyalangan.</p>
+        <div class="footer-badge-wrap">
+          <span class="status-indicator-live">
+            <span class="status-live-beacon"></span>
+            <span>API tizimi faol</span>
+          </span>
+          <span class="footer-tech">Python &amp; Django REST Framework</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Base Scripts -->
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

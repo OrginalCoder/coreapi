@@ -1,0 +1,477 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}API Hujjatlari va Interaktiv Playground — CoreAPI{% endblock %}
+
+{% block content %}
+<div class="docs-layout">
+  <div class="container docs-container">
+    
+    <!-- Sidebar Navigation for Docs -->
+    <aside class="docs-sidebar" aria-label="Hujjatlar bo‘limlari">
+      <div class="sidebar-sticky-white">
+        <h4 class="sidebar-title">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <span>Mundarija</span>
+        </h4>
+        <nav class="sidebar-nav">
+          <a href="#kirish" class="sidebar-link active">
+            <span class="nav-num">1</span> Kirish
+          </a>
+          <a href="#playground" class="sidebar-link highlight-link">
+            <span class="status-live-dot"></span> 2. Interaktiv Playground
+          </a>
+          <a href="#asosiy-manzil" class="sidebar-link">
+            <span class="nav-num">3</span> Asosiy manzil (Base URL)
+          </a>
+          <a href="#endpointlar" class="sidebar-link">
+            <span class="nav-num">4</span> Endpoint ma’lumotlari
+          </a>
+          <a href="#xatoliklar" class="sidebar-link">
+            <span class="nav-num">5</span> Xatolik javoblari
+          </a>
+          <a href="#kod-namunalari" class="sidebar-link">
+            <span class="nav-num">6</span> Integratsiya namunalari
+          </a>
+          <a href="#swagger" class="sidebar-link">
+            <span class="nav-num">7</span> OpenAPI &amp; Swagger
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Documentation Content -->
+    <article class="docs-content">
+      
+      <!-- Section: Introduction -->
+      <section id="kirish" class="docs-section">
+        <div class="section-tag-light">Qo‘llanma</div>
+        <h1 class="docs-page-title">CoreAPI Hujjatlari</h1>
+        <p class="docs-lead">
+          CoreAPI — sun’iy intellekt (AI) modellariga savol yuborish va JSON formatida javob olish imkonini beruvchi yengil, ochiq va zamonaviy REST API platformasi.
+        </p>
+        <p>
+          Ushbu API orqali siz o‘zingizning <strong>Telegram botlaringiz</strong>, <strong>veb-sahifalaringiz</strong>, <strong>Python skriptlaringiz</strong> yoki <strong>mobil ilovalaringizga</strong> AI imkoniyatlarini bir necha qator kod bilan ulay olasiz.
+        </p>
+
+        <div class="callout-light callout-info">
+          <div class="callout-icon-gem icon-cobalt">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </div>
+          <div class="callout-body">
+            <strong>Hech qanday ro‘yxatdan o‘tish yoki tashrif buyuruvchi kaliti talab qilinmaydi.</strong>
+            API barcha ishlab chiquvchilar uchun ochiq. So‘rov yuborish uchun faqat savol matnini JSON formatida jo‘natish kifoya.
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Interactive Playground -->
+      <section id="playground" class="docs-section playground-section-light">
+        <div class="playground-header">
+          <div class="badge-pill light-pill">
+            <span class="badge-dot-emerald"></span>
+            <span>Jonli API Sinovi</span>
+            <span class="badge-divider"></span>
+            <span class="badge-sub">Real-Time Console</span>
+          </div>
+          <h2 class="section-title">Interaktiv API Playground</h2>
+          <p class="section-subtitle">
+            APIni to‘g‘ridan-to‘g‘ri brauzer orqali sinab ko‘ring. Savol yozing va AI javobini real vaqt rejimida qabul qiling.
+          </p>
+        </div>
+
+        <div class="playground-card-split">
+          <!-- Playground Input Section (Clean White) -->
+          <div class="playground-input-box-light">
+            <div class="playground-box-header">
+              <label for="question-input" class="box-label">
+                <span class="box-label-icon icon-cobalt-text">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                </span>
+                <span>So‘rovingizni kiriting:</span>
+              </label>
+              <span class="char-count-pill"><span id="char-current">0</span> / 4000</span>
+            </div>
+
+            <textarea 
+              id="question-input" 
+              class="playground-textarea-light" 
+              rows="4" 
+              maxlength="4000" 
+              placeholder="Masalan: Django REST Framework qanday afzalliklarga ega?"
+              aria-label="AI uchun savol"
+            ></textarea>
+
+            <!-- Sample Question Suggestions -->
+            <div class="sample-pills-wrap">
+              <span class="sample-label">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                <span>Tezkor namunalar:</span>
+              </span>
+              <button type="button" class="sample-pill-light" data-prompt="Python nima va u nimalar uchun ishlatiladi?">Python nima?</button>
+              <button type="button" class="sample-pill-light" data-prompt="API va REST arxitekturasi o‘rtasidagi farq nima?">REST API nima?</button>
+              <button type="button" class="sample-pill-light" data-prompt="Django freymvorkida qanday qilib oddiy view yozish mumkin?">Django view namunasi</button>
+            </div>
+
+            <!-- Controls -->
+            <div class="playground-controls">
+              <button type="button" id="btn-submit-playground" class="btn btn-brand-primary">
+                <span class="btn-spinner" id="playground-spinner" aria-hidden="true"></span>
+                <span id="btn-submit-text">So‘rov yuborish</span>
+                <svg id="btn-submit-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+
+              <button type="button" id="btn-clear-playground" class="btn btn-outline-light" title="Tozalash">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                <span>Tozalash</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Playground Output Section (Clean Light Editor Console) -->
+          <div class="playground-output-box-light">
+            <div class="playground-box-header output-header">
+              <div class="header-status-group">
+                <span class="box-label">
+                  <span class="box-label-icon icon-cobalt-text">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                  </span>
+                  <span>JSON javobi:</span>
+                </span>
+                <span id="playground-status-badge" class="status-badge-light idle">Kutilmoqda</span>
+                <span id="playground-time-badge" class="time-badge-light" style="display: none;">0 ms</span>
+              </div>
+              <button type="button" id="btn-copy-response" class="btn-copy-code" title="Javobni nusxalash" aria-label="JSON javobini nusxalash">
+                <svg class="copy-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="copy-label">Nusxalash</span>
+              </button>
+            </div>
+
+            <div class="response-panel-light">
+              <pre class="response-pre"><code id="playground-response" class="language-json">// So‘rov yuborilgach, AI modeli javobi shu yerda aks etadi...</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Base URL -->
+      <section id="asosiy-manzil" class="docs-section">
+        <h2 class="section-title">3. Asosiy manzil (Base URL)</h2>
+        <p>
+          Lokal ishlab chiqish jarayonida standart manzil quyidagicha:
+        </p>
+        <div class="code-card-white-strip">
+          <div class="code-card-header-light">
+            <span class="endpoint-pill-light">
+              <span class="method-tag method-dev">DEV</span>
+              <span>http://127.0.0.1:8000</span>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Endpoint Reference -->
+      <section id="endpointlar" class="docs-section">
+        <h2 class="section-title">4. Endpoint ma’lumotlari</h2>
+        <div class="endpoint-hero-card-light">
+          <div class="endpoint-line">
+            <span class="method-tag method-post">POST</span>
+            <code class="endpoint-uri">/api/v1/chat/</code>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">So‘rov parametrlari</h3>
+        <div class="table-responsive">
+          <table class="docs-table-light">
+            <thead>
+              <tr>
+                <th>Parametr</th>
+                <th>Turi</th>
+                <th>Majburiyligi</th>
+                <th>Tavsif</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>question</code></td>
+                <td><code>string</code></td>
+                <td><span class="badge-required">Majburiy</span></td>
+                <td>AI modeliga beriladigan savol matni. Maksimal uzunlik — 4,000 belgi. Bo‘sh bo‘lishi mumkin emas.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="subsection-title">So‘rov sarlavhalari (Headers)</h3>
+        <div class="table-responsive">
+          <table class="docs-table-light">
+            <thead>
+              <tr>
+                <th>Sarlavha</th>
+                <th>Qiymat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Content-Type</code></td>
+                <td><code>application/json</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="subsection-title">Namunaviy muvaffaqiyatli javob (HTTP 200)</h3>
+        <div class="code-card-stripe">
+          <div class="code-card-header">
+            <span class="badge-status-code status-200">200 OK</span>
+            <button type="button" class="btn-copy-code" data-target="json-success-code" title="Nusxalash">
+              <span class="copy-label">Nusxalash</span>
+            </button>
+          </div>
+          <div class="code-card-body">
+            <pre class="code-block-terminal" id="json-success-code"><code class="language-json">{
+  <span class="json-key">"success"</span>: <span class="json-boolean">true</span>,
+  <span class="json-key">"answer"</span>: <span class="json-string">"Django — Python asosidagi, tezkor va xavfsiz veb-freymvork."</span>
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Error Handling -->
+      <section id="xatoliklar" class="docs-section">
+        <h2 class="section-title">5. Xatolik javoblari</h2>
+        <p>
+          Barcha xatoliklar standart va tushunarli tuzilmada qaytariladi. Hech qanday ichki traceback yoki yashirin ma’lumotlar oshkor etilmaydi:
+        </p>
+
+        <!-- Error 1: invalid_request -->
+        <h4 class="error-case-title">1. So‘rov formati noto‘g‘ri (HTTP 400 Bad Request)</h4>
+        <div class="code-card-stripe">
+          <div class="code-card-body">
+            <pre class="code-block-terminal"><code class="language-json">{
+  <span class="json-key">"success"</span>: <span class="json-boolean">false</span>,
+  <span class="json-key">"error"</span>: {
+    <span class="json-key">"code"</span>: <span class="json-string">"invalid_request"</span>,
+    <span class="json-key">"message"</span>: <span class="json-string">"So‘rov formati noto‘g‘ri."</span>
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- Error 2: missing_question -->
+        <h4 class="error-case-title">2. Savol kiritilmagan (HTTP 400 Bad Request)</h4>
+        <div class="code-card-stripe">
+          <div class="code-card-body">
+            <pre class="code-block-terminal"><code class="language-json">{
+  <span class="json-key">"success"</span>: <span class="json-boolean">false</span>,
+  <span class="json-key">"error"</span>: {
+    <span class="json-key">"code"</span>: <span class="json-string">"missing_question"</span>,
+    <span class="json-key">"message"</span>: <span class="json-string">"Savol maydoni kiritilishi kerak."</span>
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- Error 3: provider_unavailable -->
+        <h4 class="error-case-title">3. AI provayderi mavjud emas (HTTP 503 Service Unavailable)</h4>
+        <div class="code-card-stripe">
+          <div class="code-card-body">
+            <pre class="code-block-terminal"><code class="language-json">{
+  <span class="json-key">"success"</span>: <span class="json-boolean">false</span>,
+  <span class="json-key">"error"</span>: {
+    <span class="json-key">"code"</span>: <span class="json-string">"provider_unavailable"</span>,
+    <span class="json-key">"message"</span>: <span class="json-string">"AI xizmati hozircha javob bermayapti."</span>
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- Error 4: provider_timeout -->
+        <h4 class="error-case-title">4. AI provayderi javob berish vaqti tugadi (HTTP 504 Gateway Timeout)</h4>
+        <div class="code-card-stripe">
+          <div class="code-card-body">
+            <pre class="code-block-terminal"><code class="language-json">{
+  <span class="json-key">"success"</span>: <span class="json-boolean">false</span>,
+  <span class="json-key">"error"</span>: {
+    <span class="json-key">"code"</span>: <span class="json-string">"provider_timeout"</span>,
+    <span class="json-key">"message"</span>: <span class="json-string">"AI xizmatidan javob kutish vaqti tugadi."</span>
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- Error 5: rate_limit_exceeded -->
+        <h4 class="error-case-title">5. Juda ko‘p so‘rov yuborildi (HTTP 429 Too Many Requests)</h4>
+        <div class="code-card-stripe">
+          <div class="code-card-body">
+            <pre class="code-block-terminal"><code class="language-json">{
+  <span class="json-key">"success"</span>: <span class="json-boolean">false</span>,
+  <span class="json-key">"error"</span>: {
+    <span class="json-key">"code"</span>: <span class="json-string">"rate_limit_exceeded"</span>,
+    <span class="json-key">"message"</span>: <span class="json-string">"Juda ko‘p so‘rov yuborildi. Iltimos, 30 soniyadan so‘ng qayta urinib ko‘ring."</span>
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- Error 6: payload_too_large -->
+        <h4 class="error-case-title">6. So‘rov hajmi me’yordan katta (HTTP 400 Bad Request)</h4>
+        <div class="code-card-stripe">
+          <div class="code-card-body">
+            <pre class="code-block-terminal"><code class="language-json">{
+  <span class="json-key">"success"</span>: <span class="json-boolean">false</span>,
+  <span class="json-key">"error"</span>: {
+    <span class="json-key">"code"</span>: <span class="json-string">"payload_too_large"</span>,
+    <span class="json-key">"message"</span>: <span class="json-string">"So‘rov hajmi 256 KB dan oshmasligi kerak."</span>
+  }
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Code Examples -->
+      <section id="kod-namunalari" class="docs-section">
+        <h2 class="section-title">6. Integratsiya namunalari</h2>
+        <p>Istalgan dasturlash tilida quyidagi namunalardan foydalanib APIni integratsiya qilishingiz mumkin:</p>
+
+        <!-- Python Example -->
+        <h3 class="subsection-title">Python (requests)</h3>
+        <div class="code-card-stripe">
+          <div class="code-card-header">
+            <span class="code-lang-tag">python</span>
+            <button type="button" class="btn-copy-code" data-target="python-sample-code" title="Nusxalash">
+              <span class="copy-label">Nusxalash</span>
+            </button>
+          </div>
+          <div class="code-card-body">
+            <pre class="code-block-terminal" id="python-sample-code"><code class="language-python">import requests
+
+url = "http://127.0.0.1:8000/api/v1/chat/"
+
+response = requests.post(
+    url,
+    json={"question": "Python nima?"},
+    timeout=60,
+)
+
+print(response.status_code)
+print(response.json())</code></pre>
+          </div>
+        </div>
+
+        <!-- JavaScript Example -->
+        <h3 class="subsection-title">JavaScript (Fetch API)</h3>
+        <div class="code-card-stripe">
+          <div class="code-card-header">
+            <span class="code-lang-tag">javascript</span>
+            <button type="button" class="btn-copy-code" data-target="js-sample-code" title="Nusxalash">
+              <span class="copy-label">Nusxalash</span>
+            </button>
+          </div>
+          <div class="code-card-body">
+            <pre class="code-block-terminal" id="js-sample-code"><code class="language-javascript">const response = await fetch("/api/v1/chat/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    question: "JavaScript nima?"
+  })
+});
+
+const data = await response.json();
+console.log(data);</code></pre>
+          </div>
+        </div>
+
+        <!-- cURL Example -->
+        <h3 class="subsection-title">cURL (Terminal)</h3>
+        <div class="code-card-stripe">
+          <div class="code-card-header">
+            <span class="code-lang-tag">bash</span>
+            <button type="button" class="btn-copy-code" data-target="curl-sample-code" title="Nusxalash">
+              <span class="copy-label">Nusxalash</span>
+            </button>
+          </div>
+          <div class="code-card-body">
+            <pre class="code-block-terminal" id="curl-sample-code"><code class="language-bash">curl -X POST http://127.0.0.1:8000/api/v1/chat/ \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Python nima?"}'</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: OpenAPI and Swagger -->
+      <section id="swagger" class="docs-section">
+        <h2 class="section-title">7. OpenAPI va Swagger UI</h2>
+        <p>
+          CoreAPI rasmiy <strong>OpenAPI 3.0</strong> spetsifikatsiyasini qo‘llab-quvvatlaydi. Avtomatik hujjatlar va test interfeyslariga quyidagi havolalar orqali o‘tishingiz mumkin:
+        </p>
+
+        <div class="schema-cards-grid">
+          <a href="{% url 'swagger-ui' %}" target="_blank" rel="noopener" class="schema-link-card-white">
+            <div class="schema-card-icon-gem icon-indigo">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div class="schema-card-info">
+              <h4 class="schema-card-title">Interaktiv Swagger UI</h4>
+              <p class="schema-card-desc">Brauzerda endpointlar, modellar va namunalarni test qilish interfeysi</p>
+              <span class="schema-link-action">Swagger’ni ochish &rarr;</span>
+            </div>
+          </a>
+
+          <a href="{% url 'schema' %}" target="_blank" rel="noopener" class="schema-link-card-white">
+            <div class="schema-card-icon-gem icon-cobalt">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+            </div>
+            <div class="schema-card-info">
+              <h4 class="schema-card-title">OpenAPI 3.0 Sxemasi</h4>
+              <p class="schema-card-desc">Mashina o‘qiy oladigan JSON/YAML formatidagi to‘liq API sxemasi</p>
+              <span class="schema-link-action">Sxemani yuklash &rarr;</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+    </article>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/docs.js' %}"></script>
+{% endblock %}
