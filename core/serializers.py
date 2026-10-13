@@ -1,11 +1,6 @@
-"""Serializers for CoreAPI chat endpoint and schema generation."""
-
 from rest_framework import serializers
 
-
 class ChatRequestSerializer(serializers.Serializer):
-    """Serializer validating incoming chat questions."""
-
     question = serializers.CharField(
         required=True,
         allow_blank=False,
@@ -31,7 +26,6 @@ class ChatRequestSerializer(serializers.Serializer):
         return super().to_internal_value(data)
 
     def validate_question(self, value: str) -> str:
-        """Ensure question is not empty or only whitespace after stripping."""
         cleaned = value.strip()
         if not cleaned:
             raise serializers.ValidationError(
@@ -40,10 +34,7 @@ class ChatRequestSerializer(serializers.Serializer):
             )
         return cleaned
 
-
 class ChatResponseSerializer(serializers.Serializer):
-    """Successful chat response representation."""
-
     success = serializers.BooleanField(
         default=True,
         help_text="So‘rov muvaffaqiyatli bajarilganligini bildiruvchi mantiqiy qiymat."
@@ -52,10 +43,7 @@ class ChatResponseSerializer(serializers.Serializer):
         help_text="AI modeli tomonidan shakllantirilgan javob matni."
     )
 
-
 class ErrorDetailSerializer(serializers.Serializer):
-    """Detailed error object representation."""
-
     code = serializers.CharField(
         help_text="Xatolik kodi (masalan, missing_question, provider_unavailable)."
     )
@@ -63,10 +51,7 @@ class ErrorDetailSerializer(serializers.Serializer):
         help_text="Foydalanuvchi yoki dasturchi uchun tushunarli o‘zbek tilidagi xabar."
     )
 
-
 class ChatErrorResponseSerializer(serializers.Serializer):
-    """Standardized error response representation."""
-
     success = serializers.BooleanField(
         default=False,
         help_text="So‘rov muvaffaqiyatsiz bo‘lganligini bildiradi."

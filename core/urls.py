@@ -1,5 +1,3 @@
-"""URL routing for CoreAPI application."""
-
 from django.urls import path
 from .views import index_view, docs_view, ChatAPIView
 

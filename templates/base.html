@@ -7,23 +7,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}CoreAPI — Dasturchilar uchun Zamonaviy AI Savol-Javob API{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}Dasturchilar uchun oson, tezkor va bepul AI savol-javob API platformasi. Oddiy HTTP so‘rovi bilan sun’iy intellekt javobini JSON formatida oling.{% endblock %}">
-  
-  <!-- Favicon -->
+
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'></polygon><polyline points='2 17 12 22 22 17'></polyline><polyline points='2 12 12 17 22 12'></polyline></svg>">
-  
-  <!-- Core Stylesheet -->
+
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   {% block extra_head %}{% endblock %}
 </head>
 <body class="stripe-light-body">
-  <!-- Soft Ambient Background & Grid Canvas -->
+  
   <div class="light-ambient-mesh" aria-hidden="true">
     <div class="ambient-glow glow-top"></div>
     <div class="ambient-glow glow-accent"></div>
   </div>
   <div class="light-grid-pattern" aria-hidden="true"></div>
 
-  <!-- Navigation Header -->
   <header class="site-header">
     <div class="container header-container">
       <a href="{% url 'index' %}" class="brand-logo" aria-label="CoreAPI Bosh sahifa">
@@ -82,12 +79,10 @@
     </div>
   </header>
 
-  <!-- Main Content -->
   <main id="main-content">
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-brand">
@@ -150,7 +145,6 @@
     </div>
   </footer>
 
-  <!-- Base Scripts -->
   <script src="{% static 'js/main.js' %}"></script>
   {% block extra_scripts %}{% endblock %}
 </body>

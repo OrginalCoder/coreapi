@@ -1,12 +1,3 @@
-"""AI Provider client for CoreAPI.
-
-This module encapsulates all external communication with the AI provider.
-Supported provider types:
-- groq: Direct Groq Cloud API integration using official Groq SDK / HTTP (Llama 3, openai/gpt-oss-safeguard-20b, etc.)
-- openai_compatible: Any standard OpenAI-compatible API endpoint (Groq, OpenRouter, OpenAI, Ollama, etc.)
-- freegpt4: Local Free-GPT4-WEB-API server (default: http://127.0.0.1:5500)
-"""
-
 import os
 import logging
 import re
@@ -18,36 +9,25 @@ from .prompts import DEFAULT_SYSTEM_INSTRUCTION, format_user_prompt
 
 logger = logging.getLogger(__name__)
 
-
 class AIClientError(Exception):
-    """Base exception for all AI client failures."""
     def __init__(self, message: str, code: str = "provider_error"):
         super().__init__(message)
         self.message = message
         self.code = code
 
-
 class AIProviderUnavailableError(AIClientError):
-    """Raised when the AI provider cannot be reached or is temporarily offline."""
     def __init__(self, message: str = "AI xizmati hozircha javob bermayapti."):
         super().__init__(message, code="provider_unavailable")
 
-
 class AIProviderTimeoutError(AIClientError):
-    """Raised when the AI provider takes longer than the configured timeout to respond."""
     def __init__(self, message: str = "AI xizmatidan javob kutish vaqti tugadi."):
         super().__init__(message, code="provider_timeout")
 
-
 class AIProviderResponseError(AIClientError):
-    """Raised when the AI provider returns an error payload or malformed response."""
     def __init__(self, message: str = "AI xizmatida xatolik yuz berdi."):
         super().__init__(message, code="provider_error")
 
-
 class AIClient:
-    """Client for communicating with the external AI provider."""
-
     def __init__(
         self,
         provider_type: Optional[str] = None,
@@ -89,7 +69,6 @@ class AIClient:
         )
 
     def ask(self, question: str) -> str:
-        """Send question to the configured AI provider and return the answer string."""
         cleaned_question = format_user_prompt(question)
 
         if self.provider_type == 'groq':
@@ -99,7 +78,6 @@ class AIClient:
         return self._call_freegpt4(cleaned_question)
 
     def _call_groq(self, question: str) -> str:
-        """Call Groq Cloud API directly using groq SDK or fallback."""
         api_key = self.api_key or os.getenv('GROQ_API_KEY', '')
         if not api_key:
             raise AIProviderResponseError(
@@ -109,14 +87,12 @@ class AIClient:
         try:
             from groq import Groq, APIConnectionError, RateLimitError, APITimeoutError, AuthenticationError
         except ImportError:
-            # Fallback to OpenAI-compatible HTTP call if groq library is missing
             return self._call_openai_compatible(question)
 
         try:
             logger.info("Calling Groq API with model %s", self.model)
             client = Groq(api_key=api_key, timeout=float(self.timeout))
 
-            # Configure parameters matching Groq documentation
             completion = client.chat.completions.create(
                 model=self.model,
                 messages=[
@@ -131,7 +107,6 @@ class AIClient:
             choice = completion.choices[0]
             answer = (choice.message.content or "").strip()
 
-            # Handle reasoning output if model returned reasoning
             if not answer and hasattr(choice.message, 'reasoning') and choice.message.reasoning:
                 answer = str(choice.message.reasoning).strip()
 
@@ -159,7 +134,6 @@ class AIClient:
             raise AIProviderResponseError(f"Groq xizmatida xatolik yuz berdi: {exc}") from exc
 
     def _call_freegpt4(self, question: str) -> str:
-        """Call Free-GPT4-WEB-API server via GET {base_url}/?{keyword}={question}."""
         target_url = self.base_url or 'http://127.0.0.1:5500'
         if not target_url.endswith('/'):
             target_url += '/'
@@ -205,7 +179,6 @@ class AIClient:
         return raw_text
 
     def _call_openai_compatible(self, question: str) -> str:
-        """Call standard OpenAI-compatible chat completions endpoint."""
         target_url = self.base_url
         if not target_url.endswith('/chat/completions'):
             if not target_url.endswith('/v1'):
@@ -259,8 +232,6 @@ class AIClient:
             logger.warning("Failed to parse OpenAI-compatible response: %s", exc)
             raise AIProviderResponseError("AI xizmati javobini o'qib bo'lmadi.") from exc
 
-
 def ask_ai(question: str) -> str:
-    """Convenience helper to send question to AI provider using default client configuration."""
     client = AIClient()
     return client.ask(question)

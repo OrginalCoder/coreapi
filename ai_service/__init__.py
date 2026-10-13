@@ -1,5 +1,3 @@
-"""AI Service package for CoreAPI."""
-
 from .client import (
     AIClient,
     AIClientError,

@@ -255,15 +255,12 @@ class ChatAPITests(TestCase):
         mock_ask_ai.return_value = "Test javob"
 
         with patch.object(ChatRateThrottle, 'get_rate', return_value='2/min'):
-            # 1st request - ok
             res1 = self.client.post(self.chat_url, data={"question": "Savol 1"}, content_type="application/json")
             self.assertEqual(res1.status_code, status.HTTP_200_OK)
 
-            # 2nd request - ok
             res2 = self.client.post(self.chat_url, data={"question": "Savol 2"}, content_type="application/json")
             self.assertEqual(res2.status_code, status.HTTP_200_OK)
 
-            # 3rd request - throttled 429
             res3 = self.client.post(self.chat_url, data={"question": "Savol 3"}, content_type="application/json")
             self.assertEqual(res3.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
             data3 = res3.json()

@@ -1,5 +1,3 @@
-"""System prompts, safety instructions, and prompt sanitizers for CoreAPI."""
-
 import re
 
 DEFAULT_SYSTEM_INSTRUCTION = (
@@ -12,27 +10,11 @@ DEFAULT_SYSTEM_INSTRUCTION = (
     "3. Zararli kodlar, kiberhujum skriptlari yoki noqonuniy harakatlar bo‘yicha qo‘llanma yoki ko‘mak bermang."
 )
 
-
 def format_user_prompt(question: str) -> str:
-    """Format and sanitize the user question for AI provider consumption.
-
-    Strips hidden control characters, zero-width spaces (often used to bypass safety filters),
-    and normalizes whitespace while preserving valid punctuation.
-
-    Args:
-        question: Raw question submitted by developer/client.
-
-    Returns:
-        Cleaned, sanitized string.
-    """
     if not question:
         return ""
 
-    # Strip dangerous control characters (0x00-0x08, 0x0B, 0x0C, 0x0E-0x1F, 0x7F)
-    # and zero-width spaces (\u200B, \u200C, \u200D, \uFEFF)
     sanitized = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f\u200b-\u200d\ufeff]', '', question)
-
-    # Normalize excessive carriage returns / trailing whitespaces
     sanitized = re.sub(r'\r\n', '\n', sanitized)
     sanitized = re.sub(r'\r', '\n', sanitized)
 

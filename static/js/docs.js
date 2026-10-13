@@ -1,15 +1,10 @@
-/**
- * CoreAPI — Documentation & Interactive Playground Logic
- */
+
 
 document.addEventListener('DOMContentLoaded', () => {
   initPlayground();
   initSidebarSpy();
 });
 
-/**
- * Initialize interactive API playground
- */
 function initPlayground() {
   const input = document.getElementById('question-input');
   const submitBtn = document.getElementById('btn-submit-playground');
@@ -25,15 +20,11 @@ function initPlayground() {
   const samplePills = document.querySelectorAll('.sample-pill, .sample-pill-glass, .sample-pill-light');
 
   if (!submitBtn || !input || !responseBlock) return;
-
-  // Real-time character count tracker
   input.addEventListener('input', () => {
     if (charCurrent) {
       charCurrent.textContent = input.value.length;
     }
   });
-
-  // Sample prompt pills click handler
   samplePills.forEach((pill) => {
     pill.addEventListener('click', () => {
       const prompt = pill.getAttribute('data-prompt');
@@ -44,8 +35,6 @@ function initPlayground() {
       }
     });
   });
-
-  // Clear button
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       input.value = '';
@@ -56,8 +45,6 @@ function initPlayground() {
       input.focus();
     });
   }
-
-  // Copy response button
   if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
       const content = responseBlock.textContent || '';
@@ -80,16 +67,12 @@ function initPlayground() {
       }
     });
   }
-
-  // Handle Ctrl+Enter to submit
   input.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
       e.preventDefault();
       submitBtn.click();
     }
   });
-
-  // Main Submit Action
   submitBtn.addEventListener('click', async () => {
     const rawQuestion = input.value.trim();
 
@@ -109,8 +92,6 @@ function initPlayground() {
       input.focus();
       return;
     }
-
-    // Set loading state
     setLoading(true);
     setStatus('loading', 'Yuborilmoqda...');
     responseBlock.textContent = '// AI modelidan javob kutilmoqda...\n// Bu bir necha soniya vaqt olishi mumkin.';
@@ -118,7 +99,6 @@ function initPlayground() {
     const startTime = performance.now();
 
     try {
-      // Relative path to current website origin
       const response = await fetch('/api/v1/chat/', {
         method: 'POST',
         headers: {
@@ -146,11 +126,7 @@ function initPlayground() {
           }
         };
       }
-
-      // Safe rendering using textContent
       responseBlock.textContent = JSON.stringify(data, null, 2);
-
-      // Status badge reflection
       if (response.ok && data.success) {
         setStatus('success', `${response.status} OK`);
       } else {
@@ -201,9 +177,6 @@ function initPlayground() {
   }
 }
 
-/**
- * Active navigation spy for docs sidebar
- */
 function initSidebarSpy() {
   const links = document.querySelectorAll('.sidebar-nav .sidebar-link');
   const sections = document.querySelectorAll('.docs-section');

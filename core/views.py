@@ -1,5 +1,3 @@
-"""Views for CoreAPI web pages and REST API endpoints."""
-
 import logging
 from django.shortcuts import render
 from django.utils import timezone
@@ -25,40 +23,30 @@ from .serializers import (
 
 logger = logging.getLogger(__name__)
 
-
 def index_view(request):
-    """Render the public landing page in Uzbek."""
     context = {
         'current_year': timezone.now().year,
     }
     return render(request, 'index.html', context)
 
-
 def docs_view(request):
-    """Render the documentation and interactive playground page in Uzbek."""
     context = {
         'current_year': timezone.now().year,
     }
     return render(request, 'docs.html', context)
 
-
 def custom_404_view(request, exception=None):
-    """Render custom 404 Not Found error page in CoreAPI visual style."""
     context = {
         'current_year': timezone.now().year,
     }
     return render(request, '404.html', context, status=404)
 
-
 class ChatAPIView(APIView):
-    """Public AI Chat Question & Answer endpoint."""
-
     serializer_class = ChatRequestSerializer
     throttle_classes = [ChatRateThrottle]
     http_method_names = ['post']
 
     def handle_exception(self, exc):
-        """Intercept Throttled exception to return uniform CoreAPI error structure."""
         if isinstance(exc, Throttled):
             wait_seconds = int(exc.wait) if exc.wait else 60
             return Response(
@@ -196,12 +184,10 @@ class ChatAPIView(APIView):
         tags=["Chat"],
     )
     def post(self, request, *args, **kwargs):
-        """Process incoming question and return AI-generated answer."""
-        # 1. Payload size check (reject requests exceeding 256 KB before heavy processing)
         content_length = request.META.get('CONTENT_LENGTH')
         if content_length:
             try:
-                if int(content_length) > 262144:  # 256 KB
+                if int(content_length) > 262144:
                     return Response(
                         {
                             "success": False,
@@ -216,7 +202,6 @@ class ChatAPIView(APIView):
                 pass
 
         try:
-            # Explicit Content-Type and payload inspection
             if not request.content_type or 'application/json' not in request.content_type.lower():
                 return Response(
                     {
@@ -267,7 +252,6 @@ class ChatAPIView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Validate question field presence
         if 'question' not in data:
             return Response(
                 {
@@ -282,7 +266,6 @@ class ChatAPIView(APIView):
 
         serializer = self.serializer_class(data=data)
         if not serializer.is_valid():
-            # Extract specific validation code and message
             q_errors = serializer.errors.get('question', [])
             error_code = "invalid_request"
             error_message = "So‘rov formati noto‘g‘ri."
@@ -313,7 +296,6 @@ class ChatAPIView(APIView):
 
         question = serializer.validated_data['question']
 
-        # Call external AI service
         try:
             answer = ask_ai(question)
             return Response(

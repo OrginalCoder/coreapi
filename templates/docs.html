@@ -6,8 +6,7 @@
 {% block content %}
 <div class="docs-layout">
   <div class="container docs-container">
-    
-    <!-- Sidebar Navigation for Docs -->
+
     <aside class="docs-sidebar" aria-label="Hujjatlar bo‘limlari">
       <div class="sidebar-sticky-white">
         <h4 class="sidebar-title">
@@ -47,10 +46,8 @@
       </div>
     </aside>
 
-    <!-- Main Documentation Content -->
     <article class="docs-content">
-      
-      <!-- Section: Introduction -->
+
       <section id="kirish" class="docs-section">
         <div class="section-tag-light">Qo‘llanma</div>
         <h1 class="docs-page-title">CoreAPI Hujjatlari</h1>
@@ -76,7 +73,6 @@
         </div>
       </section>
 
-      <!-- Section: Interactive Playground -->
       <section id="playground" class="docs-section playground-section-light">
         <div class="playground-header">
           <div class="badge-pill light-pill">
@@ -92,7 +88,7 @@
         </div>
 
         <div class="playground-card-split">
-          <!-- Playground Input Section (Clean White) -->
+          
           <div class="playground-input-box-light">
             <div class="playground-box-header">
               <label for="question-input" class="box-label">
@@ -115,7 +111,6 @@
               aria-label="AI uchun savol"
             ></textarea>
 
-            <!-- Sample Question Suggestions -->
             <div class="sample-pills-wrap">
               <span class="sample-label">
                 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
@@ -128,7 +123,6 @@
               <button type="button" class="sample-pill-light" data-prompt="Django freymvorkida qanday qilib oddiy view yozish mumkin?">Django view namunasi</button>
             </div>
 
-            <!-- Controls -->
             <div class="playground-controls">
               <button type="button" id="btn-submit-playground" class="btn btn-brand-primary">
                 <span class="btn-spinner" id="playground-spinner" aria-hidden="true"></span>
@@ -149,7 +143,6 @@
             </div>
           </div>
 
-          <!-- Playground Output Section (Clean Light Editor Console) -->
           <div class="playground-output-box-light">
             <div class="playground-box-header output-header">
               <div class="header-status-group">
@@ -181,23 +174,21 @@
         </div>
       </section>
 
-      <!-- Section: Base URL -->
       <section id="asosiy-manzil" class="docs-section">
         <h2 class="section-title">3. Asosiy manzil (Base URL)</h2>
         <p>
-          Lokal ishlab chiqish jarayonida standart manzil quyidagicha:
+          API ning rasmiy bazaviy manzili:
         </p>
         <div class="code-card-white-strip">
           <div class="code-card-header-light">
             <span class="endpoint-pill-light">
-              <span class="method-tag method-dev">DEV</span>
-              <span>http://127.0.0.1:8000</span>
+              <span class="method-tag method-live">PROD</span>
+              <span>https://coreapi.pythonanywhere.com</span>
             </span>
           </div>
         </div>
       </section>
 
-      <!-- Section: Endpoint Reference -->
       <section id="endpointlar" class="docs-section">
         <h2 class="section-title">4. Endpoint ma’lumotlari</h2>
         <div class="endpoint-hero-card-light">
@@ -264,14 +255,12 @@
         </div>
       </section>
 
-      <!-- Section: Error Handling -->
       <section id="xatoliklar" class="docs-section">
         <h2 class="section-title">5. Xatolik javoblari</h2>
         <p>
           Barcha xatoliklar standart va tushunarli tuzilmada qaytariladi. Hech qanday ichki traceback yoki yashirin ma’lumotlar oshkor etilmaydi:
         </p>
 
-        <!-- Error 1: invalid_request -->
         <h4 class="error-case-title">1. So‘rov formati noto‘g‘ri (HTTP 400 Bad Request)</h4>
         <div class="code-card-stripe">
           <div class="code-card-body">
@@ -285,7 +274,6 @@
           </div>
         </div>
 
-        <!-- Error 2: missing_question -->
         <h4 class="error-case-title">2. Savol kiritilmagan (HTTP 400 Bad Request)</h4>
         <div class="code-card-stripe">
           <div class="code-card-body">
@@ -299,7 +287,6 @@
           </div>
         </div>
 
-        <!-- Error 3: provider_unavailable -->
         <h4 class="error-case-title">3. AI provayderi mavjud emas (HTTP 503 Service Unavailable)</h4>
         <div class="code-card-stripe">
           <div class="code-card-body">
@@ -313,7 +300,6 @@
           </div>
         </div>
 
-        <!-- Error 4: provider_timeout -->
         <h4 class="error-case-title">4. AI provayderi javob berish vaqti tugadi (HTTP 504 Gateway Timeout)</h4>
         <div class="code-card-stripe">
           <div class="code-card-body">
@@ -327,7 +313,6 @@
           </div>
         </div>
 
-        <!-- Error 5: rate_limit_exceeded -->
         <h4 class="error-case-title">5. Juda ko‘p so‘rov yuborildi (HTTP 429 Too Many Requests)</h4>
         <div class="code-card-stripe">
           <div class="code-card-body">
@@ -341,7 +326,6 @@
           </div>
         </div>
 
-        <!-- Error 6: payload_too_large -->
         <h4 class="error-case-title">6. So‘rov hajmi me’yordan katta (HTTP 400 Bad Request)</h4>
         <div class="code-card-stripe">
           <div class="code-card-body">
@@ -356,12 +340,10 @@
         </div>
       </section>
 
-      <!-- Section: Code Examples -->
       <section id="kod-namunalari" class="docs-section">
         <h2 class="section-title">6. Integratsiya namunalari</h2>
         <p>Istalgan dasturlash tilida quyidagi namunalardan foydalanib APIni integratsiya qilishingiz mumkin:</p>
 
-        <!-- Python Example -->
         <h3 class="subsection-title">Python (requests)</h3>
         <div class="code-card-stripe">
           <div class="code-card-header">
@@ -373,7 +355,7 @@
           <div class="code-card-body">
             <pre class="code-block-terminal" id="python-sample-code"><code class="language-python">import requests
 
-url = "http://127.0.0.1:8000/api/v1/chat/"
+url = "https://coreapi.pythonanywhere.com/api/v1/chat/"
 
 response = requests.post(
     url,
@@ -386,7 +368,6 @@ print(response.json())</code></pre>
           </div>
         </div>
 
-        <!-- JavaScript Example -->
         <h3 class="subsection-title">JavaScript (Fetch API)</h3>
         <div class="code-card-stripe">
           <div class="code-card-header">
@@ -396,7 +377,7 @@ print(response.json())</code></pre>
             </button>
           </div>
           <div class="code-card-body">
-            <pre class="code-block-terminal" id="js-sample-code"><code class="language-javascript">const response = await fetch("/api/v1/chat/", {
+            <pre class="code-block-terminal" id="js-sample-code"><code class="language-javascript">const response = await fetch("https://coreapi.pythonanywhere.com/api/v1/chat/", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
@@ -411,7 +392,6 @@ console.log(data);</code></pre>
           </div>
         </div>
 
-        <!-- cURL Example -->
         <h3 class="subsection-title">cURL (Terminal)</h3>
         <div class="code-card-stripe">
           <div class="code-card-header">
@@ -421,22 +401,21 @@ console.log(data);</code></pre>
             </button>
           </div>
           <div class="code-card-body">
-            <pre class="code-block-terminal" id="curl-sample-code"><code class="language-bash">curl -X POST http://127.0.0.1:8000/api/v1/chat/ \
+            <pre class="code-block-terminal" id="curl-sample-code"><code class="language-bash">curl -X POST https://coreapi.pythonanywhere.com/api/v1/chat/ \
   -H "Content-Type: application/json" \
   -d '{"question": "Python nima?"}'</code></pre>
           </div>
         </div>
       </section>
 
-      <!-- Section: OpenAPI and Swagger -->
       <section id="swagger" class="docs-section">
         <h2 class="section-title">7. OpenAPI va Swagger UI</h2>
         <p>
-          CoreAPI rasmiy <strong>OpenAPI 3.0</strong> spetsifikatsiyasini qo‘llab-quvvatlaydi. Avtomatik hujjatlar va test interfeyslariga quyidagi havolalar orqali o‘tishingiz mumkin:
+          CoreAPI rasmiy <strong>OpenAPI 3.0</strong> spetsifikatsiyasini qo‘llab-quvvatlaydi. Rasmiy manzil: <code>https://coreapi.pythonanywhere.com/api/swagger/</code>. Avtomatik hujjatlar va test interfeyslariga quyidagi havolalar orqali o‘tishingiz mumkin:
         </p>
 
         <div class="schema-cards-grid">
-          <a href="{% url 'swagger-ui' %}" target="_blank" rel="noopener" class="schema-link-card-white">
+          <a href="https://coreapi.pythonanywhere.com/api/swagger/" target="_blank" rel="noopener" class="schema-link-card-white">
             <div class="schema-card-icon-gem icon-indigo">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
@@ -446,12 +425,12 @@ console.log(data);</code></pre>
             </div>
             <div class="schema-card-info">
               <h4 class="schema-card-title">Interaktiv Swagger UI</h4>
-              <p class="schema-card-desc">Brauzerda endpointlar, modellar va namunalarni test qilish interfeysi</p>
+              <p class="schema-card-desc">https://coreapi.pythonanywhere.com/api/swagger/</p>
               <span class="schema-link-action">Swagger’ni ochish &rarr;</span>
             </div>
           </a>
 
-          <a href="{% url 'schema' %}" target="_blank" rel="noopener" class="schema-link-card-white">
+          <a href="https://coreapi.pythonanywhere.com/api/schema/" target="_blank" rel="noopener" class="schema-link-card-white">
             <div class="schema-card-icon-gem icon-cobalt">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -460,7 +439,7 @@ console.log(data);</code></pre>
             </div>
             <div class="schema-card-info">
               <h4 class="schema-card-title">OpenAPI 3.0 Sxemasi</h4>
-              <p class="schema-card-desc">Mashina o‘qiy oladigan JSON/YAML formatidagi to‘liq API sxemasi</p>
+              <p class="schema-card-desc">https://coreapi.pythonanywhere.com/api/schema/</p>
               <span class="schema-link-action">Sxemani yuklash &rarr;</span>
             </div>
           </a>
